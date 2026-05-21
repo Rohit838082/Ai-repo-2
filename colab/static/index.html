@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Model Router</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-blobs"></div>
+    <main class="shell">
+      <aside class="panel sidebar">
+        <div class="brand">
+          <div class="brand-mark">MR</div>
+          <div>
+            <p class="eyebrow">Router Studio</p>
+            <h1>Multi-Model Router</h1>
+          </div>
+        </div>
+
+        <section>
+          <div class="section-head">
+            <h2>Models</h2>
+            <button id="add-model-btn" class="ghost-btn" type="button">Add</button>
+          </div>
+          <div id="models-list" class="models-list"></div>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <h2>Routing</h2>
+          </div>
+          <label class="field">
+            <span>Mode</span>
+            <select id="mode">
+              <option value="auto">Auto</option>
+              <option value="manual">Manual</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Manual model</span>
+            <select id="manual-model"></select>
+          </label>
+          <button id="save-btn" class="primary-btn" type="button">Save Models</button>
+        </section>
+      </aside>
+
+      <section class="panel workspace">
+        <header class="hero card">
+          <div>
+            <p class="eyebrow">Backend Router + UI</p>
+            <h2>Route one prompt to the best server or API.</h2>
+            <p class="subtle">
+              Add OpenAI-compatible endpoints, choose auto routing, and inspect the
+              selected model before sending traffic.
+            </p>
+          </div>
+          <div class="hero-status">
+            <div id="backend-badge" class="status-badge">Checking backend...</div>
+            <div id="route-badge" class="route-badge">Ready</div>
+          </div>
+        </header>
+
+        <section class="grid">
+          <div class="card chat-card">
+            <div class="section-head">
+              <h3>Test Prompt</h3>
+              <button id="route-only-btn" class="ghost-btn" type="button">Preview route</button>
+            </div>
+            <label class="field">
+              <span>System prompt</span>
+              <textarea id="system-prompt" rows="3" placeholder="You are a helpful routing test assistant."></textarea>
+            </label>
+            <label class="field">
+              <span>Message</span>
+              <textarea
+                id="message"
+                rows="8"
+                placeholder="Ask a coding, math, reasoning, or general question..."
+              ></textarea>
+            </label>
+            <div class="inline-controls">
+              <label class="field compact">
+                <span>Temperature</span>
+                <input id="temperature" type="number" min="0" max="2" step="0.1" value="0.4" />
+              </label>
+              <label class="field compact">
+                <span>Max tokens</span>
+                <input id="max-tokens" type="number" min="16" step="16" value="512" />
+              </label>
+            </div>
+            <button id="send-btn" class="primary-btn" type="button">Send to router</button>
+          </div>
+
+          <div class="card output-card">
+            <div class="section-head">
+              <h3>Route Decision</h3>
+            </div>
+            <pre id="route-output" class="output"></pre>
+          </div>
+
+          <div class="card output-card">
+            <div class="section-head">
+              <h3>Model Response</h3>
+            </div>
+            <pre id="answer-output" class="output"></pre>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="model-template">
+      <article class="model-item card">
+        <div class="model-item-top">
+          <input class="model-name" placeholder="Model name" />
+          <label class="toggle">
+            <input class="model-enabled" type="checkbox" checked />
+            <span>Enabled</span>
+          </label>
+        </div>
+        <div class="model-fields">
+          <label class="field">
+            <span>Base URL</span>
+            <input class="model-base-url" placeholder="http://localhost:8000/v1" />
+          </label>
+          <label class="field">
+            <span>Model id</span>
+            <input class="model-model" placeholder="gpt-4o-mini" />
+          </label>
+          <label class="field">
+            <span>API key</span>
+            <input class="model-api-key" placeholder="Optional" />
+          </label>
+          <label class="field">
+            <span>Tags</span>
+            <input class="model-tags" placeholder="chat,code,math,reasoning" />
+          </label>
+          <label class="field compact">
+            <span>Priority</span>
+            <input class="model-priority" type="number" step="1" value="0" />
+          </label>
+        </div>
+        <div class="model-actions">
+          <button class="ghost-btn remove-model" type="button">Remove</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
