@@ -1,0 +1,18 @@
+[
+  {
+    "id": "default-chat",
+    "name": "Default Chat Model",
+    "base_url": "https://your-openai-compatible-server/v1",
+    "model": "your-model-id",
+    "api_key": "",
+    "provider": "openai_compatible",
+    "tags": [
+      "chat",
+      "general"
+    ],
+    "priority": 10,
+    "enabled": true,
+    "temperature": null,
+    "max_tokens": null
+  }
+]
